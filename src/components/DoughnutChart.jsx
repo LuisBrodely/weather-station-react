@@ -118,7 +118,7 @@ const DoughnutChart = () => {
           </div>
 
           <div className="relative">
-            <h2 className="text-center font-medium text-6xl mt-10">
+            <h2 className="text-center font-medium text-6xl mt-8">
               {lastRenderedData[lastRenderedData.length - 1] &&
                 Math.round(
                   lastRenderedData[lastRenderedData.length - 1].humidity * 0.6 +
@@ -129,7 +129,7 @@ const DoughnutChart = () => {
             <Bar
               data={dataHumedades}
               options={options}
-              className="mt-8 mb-8"
+              className="mt-10 mb-8"
             />
           </div>
 
