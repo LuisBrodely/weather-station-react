@@ -3,61 +3,100 @@ import { useContext, useState, useEffect } from "react";
 import { MyContext } from "../context/MyContext";
 import { BsCircleFill } from "react-icons/bs";
 import { useMemo } from "react";
-
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const DoughnutChart = () => {
-  const { isPaused, setIsPaused, sensorData, sensors } =
-    useContext(MyContext);
-  const [lastRenderedData, setLastRenderedData] = useState({
-    humidity: 0,
-    humidity2: 0,
-    humidity3: 0,
-  });
+  const { isPaused, setIsPaused, sensorData, sensors } = useContext(MyContext);
+  const [lastRenderedData, setLastRenderedData] = useState([]);
+
+  console.log(sensorData)
 
   useEffect(() => {
     if (!isPaused) {
-      setLastRenderedData({
-        humidity: sensors.humidity,
-        humidity2: sensors.humidity2,
-        humidity3: sensors.humidity3,
-      });
+      setLastRenderedData(sensorData);
     }
   }, [sensorData, isPaused]);
 
-  const data = {
+  const handlePause = () => {
+    setIsPaused(!isPaused);
+  };
+
+  const labels = Array.from({ length: 1 }, (_, index) => index + 1);
+
+  const dataHumedades = {
+    labels: labels,
     datasets: [
       {
-        label: ["Media Ponderada"],
-        data: [
-          Math.round(
-            lastRenderedData.humidity * 0.6 + lastRenderedData.humidity2 * 0.4
-          ),
-          100 -
-            Math.round(
-              lastRenderedData.humidity * 0.6 + lastRenderedData.humidity2 * 0.4
-            ),
-        ],
-        backgroundColor: ["#9D782F", "#1F1F1F"],
-        borderColor: "transparent",
+        label: "Humedad 1",
+        data: lastRenderedData
+          .map((item, index) =>
+            index === lastRenderedData.length - 1 ? item.humidity : null
+          )
+          .filter((value) => value !== null),
+        backgroundColor: "#D2BA89",
+        pointBorderColor: "transparent",
+        pointBorderWidth: 4,
+        borderColor: "#D2BA89",
       },
       {
-        label: ["Sensor 2"],
-        data: [lastRenderedData.humidity2, 100 - lastRenderedData.humidity2],
-        backgroundColor: ["#c5983e", "#292929"],
-        borderColor: "transparent",
+        label: "Media ponderada",
+        data: lastRenderedData
+          .map((item, index) => {
+            const weightedAverage = Math.round(
+              item.humidity * 0.6 + item.humidity2 * 0.4
+            );
+            return index === lastRenderedData.length - 1
+              ? weightedAverage
+              : null;
+          })
+          .filter((value) => value !== null),
+        backgroundColor: "#9D782F",
+        pointBorderColor: "transparent",
+        pointBorderWidth: 4,
+        borderColor: "#9D782F",
       },
       {
-        label: ["Sensor 1"],
-        data: [lastRenderedData.humidity, 100 - lastRenderedData.humidity],
-        backgroundColor: ["#D2BA89", "#333333"],
-        borderColor: "transparent",
+        label: "Humedad 2",
+        data: lastRenderedData
+          .map((item, index) =>
+            index === lastRenderedData.length - 1 ? item.humidity2 : null
+          )
+          .filter((value) => value !== null),
+        backgroundColor: "#c5983e",
+        pointBorderColor: "transparent",
+        pointBorderWidth: 4,
+        borderColor: "#c5983e",
       },
     ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+    },
   };
 
   return (
@@ -79,26 +118,31 @@ const DoughnutChart = () => {
           </div>
 
           <div className="relative">
-            <Doughnut data={data} className=" cursor-pointer" />
-            <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium text-5xl">
-              {Math.round(
-                lastRenderedData.humidity * 0.6 +
-                  lastRenderedData.humidity2 * 0.4
-              )}
-              %
+            <h2 className="text-center font-medium text-6xl mt-10">
+              {lastRenderedData[lastRenderedData.length - 1] &&
+                Math.round(
+                  lastRenderedData[lastRenderedData.length - 1].humidity * 0.6 +
+                    lastRenderedData[lastRenderedData.length - 1].humidity2 *
+                      0.4
+                )}%
             </h2>
+            <Bar
+              data={dataHumedades}
+              options={options}
+              className="mt-8 mb-8"
+            />
           </div>
 
-          <div className="flex mt-10">
+          {/* <div className="flex mt-10">
             <div className="flex items-center space-x-3 flex-1 text-sm text-gray-200 font-medium">
               <div className="bg-[#D2BA89] w-3 h-3 rounded-full"></div>
-              <h3>Sensor 1: {lastRenderedData.humidity}%</h3>
+              <h3>Sensor 1: {humidity.humidityA}%</h3>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-200 font-medium">
               <div className="bg-[#C5983E] w-3 h-3 rounded-full"></div>
-              <h3>Sensor 2: {lastRenderedData.humidity2}%</h3>
+              <h3>Sensor 2: {humidity.humidityB}%</h3>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
