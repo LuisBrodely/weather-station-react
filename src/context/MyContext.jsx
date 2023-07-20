@@ -14,7 +14,7 @@ const MyProvider = ({ children }) => {
 
   const [isPaused, setIsPaused] = useState(false);
 
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(true);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { Menu, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useRoutes, Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 import DoughnutChart from "../components/DoughnutChart";
 
@@ -20,43 +20,49 @@ const navigation = [
   { name: "Tablas", href: "/tables", current: false },
   { name: "Graficas", href: "/graphics", current: false },
 ];
-const userNavigation = [
-  { name: 'Cerrar sesion' },
-];
+const userNavigation = [{ name: "Cerrar sesion" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Dashboard() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
-    localStorage.removeItem('token');
-    navigate('/login')
-    setAuthenticated(false)
-  }
+    localStorage.removeItem("token");
+    navigate("/login");
+    setAuthenticated(false);
+  };
 
   useEffect(() => {
-    const decodificar = localStorage.getItem('token');
+    const decodificar = localStorage.getItem("token");
     if (decodificar) {
       const tokenDecodificado = jwtDecode(decodificar);
-      console.log(user)
-      setUser(tokenDecodificado)
+      console.log(user);
+      setUser(tokenDecodificado);
       setAuthenticated(true);
     }
   }, []);
 
   const { authenticated, setAuthenticated, user, setUser } =
-  useContext(MyContext);
+    useContext(MyContext);
 
-  if(!authenticated) {
+  if (!authenticated) {
     return (
-      <section className="text-white flex items-center justify-center h-screen">
-        <h1>NO HAS INICIADO SESION</h1>
+      <section className="text-white flex flex-col items-center justify-center h-screen">
+        <img className="h-24 w-auto mb-10" src={logo} alt="BEH Software" />
+        <h1 className="text-4xl font-bold max-w-xl text-center">
+          NO SE HA ENCONTRADO NINGUNA SESION ACTIVA
+        </h1>
+        <Link
+          to="/login"
+          className="mt-10 py-2.5 px-4 bg-jasper-100 rounded-md font-medium"
+        >
+          Pulsa aqui para iniciar sesion
+        </Link>
       </section>
-    )
+    );
   }
 
   return (
@@ -81,7 +87,9 @@ export default function Dashboard() {
 
                   {/* Right section on desktop */}
                   <div className="hidden lg:ml-4 lg:flex lg:items-center lg:pr-0.5">
-                    <h2 className="text-white font-medium text-sm">{user.name}</h2>
+                    <h2 className="text-white font-medium text-sm">
+                      {user.name}
+                    </h2>
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-4 flex-shrink-0">
@@ -90,7 +98,9 @@ export default function Dashboard() {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={'https://i.pinimg.com/originals/70/71/f0/7071f09f83e63c6328e9fa6f68d1d92d.jpg'}
+                            src={
+                              "https://i.pinimg.com/originals/70/71/f0/7071f09f83e63c6328e9fa6f68d1d92d.jpg"
+                            }
                             alt=""
                           />
                         </Menu.Button>
@@ -237,7 +247,7 @@ export default function Dashboard() {
                             <div className="flex-shrink-0">
                               <img
                                 className="h-10 w-10 rounded-full"
-                                src={''}
+                                src={""}
                                 alt=""
                               />
                             </div>
