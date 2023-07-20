@@ -88,7 +88,7 @@ export default function Login() {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-pearl-100 focus:outline-none  sm:text-sm text-white"
                       />
                     </div>
                   </div>
@@ -108,36 +108,10 @@ export default function Login() {
                         type="password"
                         autoComplete="current-password"
                         required
-                        className="block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-pearl-100 focus:outline-none sm:text-sm text-white"
                       />
                     </div>
                   </div>
-
-                  {/* <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="h-4 w-4 rounded bg-pearl-50 border-night-50 text-indigo-600 focus:ring-indigo-500"
-                      />
-                      <label
-                        htmlFor="remember-me"
-                        className="ml-2 block text-sm text-gray-400"
-                      >
-                        Recodarme
-                      </label>
-                    </div>
-
-                    <div className="text-sm">
-                      <a
-                        href="#"
-                        className="font-medium text-jasper-100 hover:text-jasper-100/90"
-                      >
-                        ¿Olvidaste tu contraseña?
-                      </a>
-                    </div>
-                  </div> */}
 
                   <div>
                     <button

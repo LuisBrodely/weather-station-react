@@ -84,7 +84,7 @@ export default function Register() {
                         required
                         onChange={handleChange}
                         value={formData.name}
-                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-pearl-100 focus:outline-none  sm:text-sm"
                       />
                     </div>
                   </div>
@@ -104,7 +104,7 @@ export default function Register() {
                         required
                         onChange={handleChange}
                         value={formData.lastname}
-                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-pearl-100 focus:outline-none  sm:text-sm"
                       />
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export default function Register() {
                         required
                         onChange={handleChange}
                         value={formData.email}
-                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-pearl-100 focus:outline-none  sm:text-sm"
                       />
                     </div>
                   </div>
@@ -146,7 +146,7 @@ export default function Register() {
                         required
                         onChange={handleChange}
                         value={formData.password}
-                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="text-white block w-full appearance-none rounded-md border bg-night-50 border-night-50 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-pearl-100 focus:outline-none sm:text-sm"
                       />
                     </div>
                   </div>

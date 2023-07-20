@@ -14,7 +14,7 @@ const MyProvider = ({ children }) => {
 
   const [isPaused, setIsPaused] = useState(false);
 
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(true);
   const [user, setUser] = useState(true);
 
   useEffect(() => {
@@ -50,7 +50,6 @@ const MyProvider = ({ children }) => {
       const lastKey = keys[keys.length - 1];
       const lastElement = sensorsValue[lastKey];
       setHumedades(lastElement);
-      console.log(lastElement)
 
       const newData = keys.map((key) => sensorsValue[key]);
       const last20Elements = newData.slice(-20);

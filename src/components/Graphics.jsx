@@ -17,8 +17,6 @@ const LineChart = () => {
     useContext(MyContext);
   const [lastRenderedData, setLastRenderedData] = useState([]);
 
-  console.log(sensorData)
-
   useEffect(() => {
     if (!isPaused) {
       setLastRenderedData(sensorData);
@@ -63,6 +61,14 @@ const LineChart = () => {
         pointBorderColor: "transparent",
         pointBorderWidth: 4,
         borderColor: "#c5983e",
+      },
+      {
+        label: "Media ponderada",
+        data: lastRenderedData.map((item) => Math.round((item.humidity * 0.6) + (item.humidity2 * 0.4))),
+        backgroundColor: "#9D782F",
+        pointBorderColor: "transparent",
+        pointBorderWidth: 4,
+        borderColor: "#9D782F",
       },
     ],
   };

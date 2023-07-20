@@ -12,7 +12,7 @@ import { MyContext } from "../context/MyContext";
 const Sensors = () => {
   
   const { sensors, comparation } = useContext(MyContext);
-
+  
   return (
     <div className="p-0 grid grid-cols-2 grid-rows-2 gap-3 h-96 mt-8">
       <div className="bg-[#D2BA89] flex p-8 rounded items-center">

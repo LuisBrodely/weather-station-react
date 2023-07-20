@@ -74,7 +74,7 @@ const Tables = () => {
                   {lastRenderedData.map((sensor, index) => (
                     <tr key={index} className="divide-x divide-gray-200">
                       <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
-                        {sensor.humidity2}
+                        {sensor.humidity}
                       </td>
                       <td className="whitespace-nowrap p-4 text-sm text-gray-900 font-medium">
                         {sensor.presure}

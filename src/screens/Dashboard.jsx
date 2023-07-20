@@ -3,7 +3,7 @@ import { Menu, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useRoutes, Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 
 import DoughnutChart from "../components/DoughnutChart";
 

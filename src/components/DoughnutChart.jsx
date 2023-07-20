@@ -1,7 +1,8 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { MyContext } from "../context/MyContext";
 import { BsCircleFill } from "react-icons/bs";
+import { useMemo } from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
@@ -10,32 +11,54 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChart = () => {
+  const { isPaused, setIsPaused, sensorData, sensors } =
+    useContext(MyContext);
+  const [lastRenderedData, setLastRenderedData] = useState({
+    humidity: 0,
+    humidity2: 0,
+    humidity3: 0,
+  });
+
+  useEffect(() => {
+    if (!isPaused) {
+      setLastRenderedData({
+        humidity: sensors.humidity,
+        humidity2: sensors.humidity2,
+        humidity3: sensors.humidity3,
+      });
+    }
+  }, [sensorData, isPaused]);
 
   const data = {
     datasets: [
       {
         label: ["Media Ponderada"],
-        data: [56, 44],
-        backgroundColor: ["#A4C695", "#1F1F1F"],
+        data: [
+          Math.round(
+            lastRenderedData.humidity * 0.6 + lastRenderedData.humidity2 * 0.4
+          ),
+          100 -
+            Math.round(
+              lastRenderedData.humidity * 0.6 + lastRenderedData.humidity2 * 0.4
+            ),
+        ],
+        backgroundColor: ["#9D782F", "#1F1F1F"],
         borderColor: "transparent",
       },
       {
         label: ["Sensor 2"],
-        data: [50, 40],
+        data: [lastRenderedData.humidity2, 100 - lastRenderedData.humidity2],
         backgroundColor: ["#c5983e", "#292929"],
         borderColor: "transparent",
       },
       {
         label: ["Sensor 1"],
-        data: [53, 47],
+        data: [lastRenderedData.humidity, 100 - lastRenderedData.humidity],
         backgroundColor: ["#D2BA89", "#333333"],
         borderColor: "transparent",
       },
     ],
   };
-
-  const { humedadData, humedades } = useContext(MyContext);
-  console.log(humedades);
 
   return (
     <section aria-labelledby="section-2-title">
@@ -58,18 +81,22 @@ const DoughnutChart = () => {
           <div className="relative">
             <Doughnut data={data} className=" cursor-pointer" />
             <h2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium text-5xl">
-              50%
+              {Math.round(
+                lastRenderedData.humidity * 0.6 +
+                  lastRenderedData.humidity2 * 0.4
+              )}
+              %
             </h2>
           </div>
 
           <div className="flex mt-10">
             <div className="flex items-center space-x-3 flex-1 text-sm text-gray-200 font-medium">
               <div className="bg-[#D2BA89] w-3 h-3 rounded-full"></div>
-              <h3>Sensor 1: {humedades.humidity}%</h3>
+              <h3>Sensor 1: {lastRenderedData.humidity}%</h3>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-200 font-medium">
               <div className="bg-[#C5983E] w-3 h-3 rounded-full"></div>
-              <h3>Sensor 2: {humedades.humidity2}%</h3>
+              <h3>Sensor 2: {lastRenderedData.humidity2}%</h3>
             </div>
           </div>
         </div>
